@@ -3,7 +3,7 @@
 export default {
   data() {
     return {
-      token:'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MzMsImxvZ2luIjoiYXN0cmFsaWdodHYzQGdtYWlsLmNvbSIsInN1YiI6ImFzdHJhbGlnaHR2M0BnbWFpbC5jb20iLCJpYXQiOjE3Mjg1NzQzNTksImV4cCI6MTcyODcxODM1OX0.ouhvjOY_FjOHywZlmHzgEW9AX8yZM62uM7wXbwRNDfk',
+      token: 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MzMsImxvZ2luIjoiYXN0cmFsaWdodHYzQGdtYWlsLmNvbSIsInN1YiI6ImFzdHJhbGlnaHR2M0BnbWFpbC5jb20iLCJpYXQiOjE3Mjg4MzM4OTQsImV4cCI6MTcyODk3Nzg5NH0.plS74T52oywfsyyVV9MvDwg6c0aIlz-4abaeNDTXAsU',
       projects: [
         {id:1, number: '100-24', project_name: 'Project 1', description: 'Lorem ipsum', latitude: 59.57, longitude: 30.19},
       ],
@@ -16,6 +16,31 @@ export default {
     }
   },
   methods: {
+    async getToken(){
+      try {
+        const response = await fetch('http://82.97.253.52:8080/auth/sign-in', {
+          method: 'POST',
+          headers: {
+            'Username':'user',
+            'Password':'53027ec3-6d15-45b0-b5b4-2c666a024188',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+                "company_id":32,
+                "name":"Ar1",
+                "surname":"Ar2",
+                "login":"astralightv3@gmail.com",
+                "password":"!astralightv3!"
+          })
+        })
+
+        const jsonData = await response.json()
+        this.token = jsonData.token
+        sessionStorage.setItem('globalToken', jsonData.token)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     selectProject(id) {
       this.getSingleProject(id)
       sessionStorage.setItem('currentProjectId', this.projectId)
@@ -263,7 +288,10 @@ export default {
             <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#createProjectModal">Добавить</button>
           </div>
           <div>
-            <button class="btn btn-secondary" @click="getGlobalToken()">Получить токен</button>  
+            <button class="btn btn-secondary me-2" @click="getToken()">Получить токен</button>  
+          </div>
+          <div>
+            <input v-model="token" type="text" class="form-control" />
           </div>
         </div>
           <table class="table table-sm table-bordered">
@@ -305,6 +333,7 @@ export default {
       <div class="row mt-3">
         <h5>Dashboard</h5>
         <table class="table table-sm table-bordered">
+          <tbody>
           <tr>
             <td>Текущий проект:</td>
             <td>100-24 / ИГИ1 / Строительство сарая</td>
@@ -333,6 +362,7 @@ export default {
             <td>Зафиксировано уровней ПВ:</td>
             <td>1 (В-2)</td>
           </tr>
+        </tbody>
         </table>
       </div>
       </div>

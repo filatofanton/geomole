@@ -54,7 +54,7 @@ const currentProjectName = sessionStorage.getItem('currentProjectName')
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="eges.html"><RouterLink to="/eges">Список ИГЭ</RouterLink></a></li>
                       <li><a class="dropdown-item" href="layers.html"><RouterLink to="/layers">Послойное описание</RouterLink></a></li>
-                      <li><a class="dropdown-item" href="#">Статистика</a></li>
+                      <li><a class="dropdown-item" href="#"><RouterLink to="/physicalcharacteristicsofsoils">Состав и физические характеристики грунтов</RouterLink></a></li>
                     </ul>
                   </li>
                 </ul>

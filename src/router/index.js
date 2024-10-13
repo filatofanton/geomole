@@ -5,6 +5,7 @@ import PointsView from '@/views/PointsView.vue'
 import SamplesView from '@/views/SamplesView.vue'
 import EgesView from '@/views/EgesView.vue'
 import LayersView from '@/views/LayersView.vue'
+import PhysicalCharacteristicsOfSoils from '@/views/PhysicalCharacteristicsOfSoils.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/layers',
       name: 'layers',
       component: LayersView
+    },
+    {
+      path: '/physicalcharacteristicsofsoils',
+      name: 'physicalcharacteristicsofsoils',
+      component: PhysicalCharacteristicsOfSoils
     },
   ]
 })

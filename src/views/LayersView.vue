@@ -133,7 +133,7 @@ export default {
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Добавить слой</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Добавить слой в <span v-if="selectedPoint" class="me-2">{{ selectedPoint.type }} {{ selectedPoint.number }}</span></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -159,7 +159,7 @@ export default {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button @click="addEge()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Добавить</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Добавить</button>
           </div>
       </div>
     </div>

@@ -11,6 +11,7 @@
       </div>
       <div class="overflow-y-auto" style="height: 500px;">
         <table class="table table-sm table-bordered tbCustom">
+          <thead>
           <tr>
             <th>No.</th>
             <th>Тип</th>
@@ -29,6 +30,8 @@
             <th>Бур. мастер</th>
             <th>Action</th>
           </tr>
+          </thead>
+          <tbody>
           <tr>
             <td>1</td>
             <td>скв.</td>            
@@ -74,6 +77,7 @@
             </button>
           </td>
           </tr>
+          </tbody>
         </table>
       </div>
     </div>

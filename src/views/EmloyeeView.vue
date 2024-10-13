@@ -9,7 +9,7 @@ export default {
   },
   methods: {    
     
-    async getToken(){
+  async getToken(){
       try {
         const response = await fetch('http://82.97.253.52:8080/auth/sign-in', {
           method: 'POST',
@@ -33,7 +33,7 @@ export default {
       } catch (error) {
         console.error(error)
       }
-    },
+  },
     
   }
 }
