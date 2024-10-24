@@ -1,0 +1,145 @@
+[
+  {
+    "id": 814,
+    "number": "421-58",
+    "project_name": "Project 14",
+    "description": "Lorem ipsum",
+    "latitude": 59.843,
+    "longitude": 30.253
+  },
+  {
+    "id": 351,
+    "number": "118-91",
+    "project_name": "Project 46",
+    "description": "Lorem ipsum",
+    "latitude": 59.819,
+    "longitude": 30.191
+  },
+  {
+    "id": 467,
+    "number": "753-13",
+    "project_name": "Project 28",
+    "description": "Lorem ipsum",
+    "latitude": 59.882,
+    "longitude": 30.299
+  },
+  {
+    "id": 128,
+    "number": "649-75",
+    "project_name": "Project 49",
+    "description": "Lorem ipsum",
+    "latitude": 59.859,
+    "longitude": 30.261
+  },
+  {
+    "id": 982,
+    "number": "351-42",
+    "project_name": "Project 18",
+    "description": "Lorem ipsum",
+    "latitude": 59.789,
+    "longitude": 30.163
+  },
+  {
+    "id": 756,
+    "number": "982-29",
+    "project_name": "Project 31",
+    "description": "Lorem ipsum",
+    "latitude": 59.901,
+    "longitude": 30.281
+  },
+  {
+    "id": 219,
+    "number": "118-51",
+    "project_name": "Project 44",
+    "description": "Lorem ipsum",
+    "latitude": 59.799,
+    "longitude": 30.173
+  },
+  {
+    "id": 654,
+    "number": "467-85",
+    "project_name": "Project 25",
+    "description": "Lorem ipsum",
+    "latitude": 59.869,
+    "longitude": 30.269
+  },
+  {
+    "id": 381,
+    "number": "814-39",
+    "project_name": "Project 15",
+    "description": "Lorem ipsum",
+    "latitude": 59.823,
+    "longitude": 30.195
+  },
+  {
+    "id": 951,
+    "number": "219-98",
+    "project_name": "Project 43",
+    "description": "Lorem ipsum",
+    "latitude": 59.889,
+    "longitude": 30.279
+  },
+  {
+    "id": 627,
+    "number": "756-67",
+    "project_name": "Project 32",
+    "description": "Lorem ipsum",
+    "latitude": 59.877,
+    "longitude": 30.275
+  },
+  {
+    "id": 493,
+    "number": "654-21",
+    "project_name": "Project 26",
+    "description": "Lorem ipsum",
+    "latitude": 59.853,
+    "longitude": 30.257
+  },
+  {
+    "id": 118,
+    "number": "381-94",
+    "project_name": "Project 16",
+    "description": "Lorem ipsum",
+    "latitude": 59.789,
+    "longitude": 30.163
+  },
+  {
+    "id": 982,
+    "number": "951-48",
+    "project_name": "Project 42",
+    "description": "Lorem ipsum",
+    "latitude": 59.899,
+    "longitude": 30.281
+  },
+  {
+    "id": 756,
+    "number": "627-29",
+    "project_name": "Project 33",
+    "description": "Lorem ipsum",
+    "latitude": 59.887,
+    "longitude": 30.277
+  },
+  {
+    "id": 219,
+    "number": "493-51",
+    "project_name": "Project 27",
+    "description": "Lorem ipsum",
+    "latitude": 59.799,
+    "longitude": 30.173
+  },
+  {
+    "id": 654,
+    "number": "118-85",
+    "project_name": "Project 17",
+    "description": "Lorem ipsum",
+    "latitude": 59.869,
+    "longitude": 30.269
+  },
+  {
+    "id": 381,
+    "number": "982-39",
+    "project_name": "Project 41",
+    "description": "Lorem ipsum",
+    "latitude": 59.823
+  }
+]

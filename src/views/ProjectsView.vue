@@ -1,281 +1,65 @@
 <script>
-
-export default {
-  data() {
-    return {
-      token: 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MzMsImxvZ2luIjoiYXN0cmFsaWdodHYzQGdtYWlsLmNvbSIsInN1YiI6ImFzdHJhbGlnaHR2M0BnbWFpbC5jb20iLCJpYXQiOjE3Mjg4MzM4OTQsImV4cCI6MTcyODk3Nzg5NH0.plS74T52oywfsyyVV9MvDwg6c0aIlz-4abaeNDTXAsU',
-      projects: [
-        {id:1, number: '100-24', project_name: 'Project 1', description: 'Lorem ipsum', latitude: 59.57, longitude: 30.19},
-      ],
+  export default {
+    data(){
+      return {
+        projects: [
+          {"id": 1, "number": "421-58", "project_name": "Project 1", "description": "Lorem ipsum 1", "latitude": 59.973017, "longitude": 30.220557},
+          {"id": 2, "number": "422-58", "project_name": "Project 2", "description": "Lorem ipsum 2", "latitude": 59.853, "longitude": 30.263},
+          {"id": 3, "number": "423-58", "project_name": "Project 3", "description": "Lorem ipsum 3", "latitude": 59.845, "longitude": 30.273},
+          {"id": 4, "number": "424-58", "project_name": "Project 4", "description": "Lorem ipsum 4", "latitude": 59.833, "longitude": 30.213},
+          {"id": 5, "number": "425-58", "project_name": "Project 5", "description": "Lorem ipsum 5", "latitude": 59.847, "longitude": 30.223},
+          {"id": 6, "number": "426-58", "project_name": "Project 6", "description": "Lorem ipsum 6", "latitude": 59.843, "longitude": 30.19},
+          {"id": 7, "number": "427-58", "project_name": "Project 7", "description": "Lorem ipsum 7", "latitude": 59.842, "longitude": 30.18},
+          {"id": 8, "number": "428-58", "project_name": "Project 8", "description": "Lorem ipsum 8", "latitude": 59.841, "longitude": 30.185},
+          {"id": 9, "number": "429-58", "project_name": "Project 9", "description": "Lorem ipsum 9", "latitude": 59.840, "longitude": 30.187},
+          {"id": 10, "number": "430-58", "project_name": "Project 10", "description": "Lorem ipsum 10", "latitude": 59.851, "longitude": 30.191},
+          {"id": 11, "number": "431-58", "project_name": "Project 11", "description": "Lorem ipsum 11", "latitude": 59.852, "longitude": 30.203},
+          {"id": 12, "number": "432-58", "project_name": "Project 12", "description": "Lorem ipsum 12", "latitude": 59.854, "longitude": 30.205},
+          {"id": 13, "number": "433-58", "project_name": "Project 13", "description": "Lorem ipsum 13", "latitude": 59.855, "longitude": 30.207},
+          {"id": 14, "number": "434-58", "project_name": "Project 14", "description": "Lorem ipsum 14", "latitude": 59.856, "longitude": 30.209},
+          {"id": 15, "number": "435-58", "project_name": "Project 15", "description": "Lorem ipsum 15", "latitude": 59.857, "longitude": 30.204},
+        ],
       projectId: null,
+      number: '100-24',
       projectName: 'New project',
+      description: 'Lorem ipsum',
       latitude: 59.57,
       longitude: 30.19,
       isActive: false,
-
-    }
-  },
-  methods: {
-    async getToken(){
-      try {
-        const response = await fetch('http://82.97.253.52:8080/auth/sign-in', {
-          method: 'POST',
-          headers: {
-            'Username':'user',
-            'Password':'53027ec3-6d15-45b0-b5b4-2c666a024188',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-                "company_id":32,
-                "name":"Ar1",
-                "surname":"Ar2",
-                "login":"astralightv3@gmail.com",
-                "password":"!astralightv3!"
-          })
-        })
-
-        const jsonData = await response.json()
-        this.token = jsonData.token
-        sessionStorage.setItem('globalToken', jsonData.token)
-      } catch (error) {
-        console.error(error)
+      currentProject: null,
       }
     },
-    selectProject(id) {
-      this.getSingleProject(id)
-      sessionStorage.setItem('currentProjectId', this.projectId)
-      sessionStorage.setItem('currentProjectName', this.projectId)
-    },
-    async getAllProjects(employeeId = 3) {
-      try {
-        let token = this.token
-        const response = await fetch('http://82.97.253.52:8080/api/project/getByCreator/' + employeeId, {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          }
-        })
-        const jsonData = await response.json()
-        this.projects = jsonData
-        return jsonData
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async deleteProject(id){
-      try {
-        let token = this.token
-        const response = await fetch('http://82.97.253.52:8080/api/project/delete/', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            "id": id
-          })
-        })
-        const jsonData = await response.json()
-        console.log(jsonData)
-        this.getAllProjects()
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async createProject(){
-      try {
-        let token = this.token
-        const response = await fetch('http://82.97.253.52:8080/api/project/create/', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              "project_name": this.projectName,
-              "created_by": {
-                  "id": 3,
-                  "company": {
-                      "id": 1,
-                      "name": "root"
-                  },
-                  "name": "Bob",
-                  "surname": "Smith",
-                  "login": "bob1",
-                  "password": "qwerty"
-              },
-              "executor": {
-                  "id": 1,
-                  "company": {
-                      "id": 1,
-                      "name": "root"
-                  },
-                  "name": "Bob",
-                  "surname": "Smith",
-                  "login": "bob1",
-                  "password": "qwerty"
-              },
-              "approver": {
-                  "id": 1,
-                  "company": {
-                      "id": 1,
-                      "name": "root"
-                  },
-                  "name": "Bob",
-                  "surname": "Smith",
-                  "login": "bob1",
-                  "password": "qwerty"
-              },
-              "company": {
-                  "id": 1,
-                  "name": "root"
-              },
-              "projecting_stage": "212",
-              "start_date": "2024-08-14",
-              "end_date": "2024-08-18",
-              "address": "ТМ 1: ыв 12, 231, 1",
-              "contact_number": "89112223344",
-              "latitude": this.latitude,
-              "longitude": this.longitude,
-              "is_deleted": false
-          })
-        })
-
-        const jsonData = await response.json()
-        console.log(jsonData)
-        this.getAllProjects()
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async getSingleProject(id){
-      try {
-        let token = this.token
-        const response = await fetch('http://82.97.253.52:8080/api/project/get/' + id, {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          }
-          })
-        const jsonData = await response.json()
-        this.projectId = jsonData.id
-        this.projectName = jsonData.project_name
-        this.latitude = jsonData.latitude
-        this.longitude = jsonData.longitude
-        console.log(jsonData)
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async updateProject(){
-      try {
-        let token = this.token
-        const response = await fetch('http://82.97.253.52:8080/api/project/update/', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              "id": this.projectId,
-              "project_name": this.projectName,
-              "created_by": {
-                  "id": 3,
-                  "company": {
-                      "id": 1,
-                      "name": "root"
-                  },
-                  "name": "Bob",
-                  "surname": "Smith",
-                  "login": "bob1",
-                  "password": "qwerty"
-              },
-              "executor": {
-                  "id": 1,
-                  "company": {
-                      "id": 1,
-                      "name": "root"
-                  },
-                  "name": "Bob",
-                  "surname": "Smith",
-                  "login": "bob1",
-                  "password": "qwerty"
-              },
-              "approver": {
-                  "id": 1,
-                  "company": {
-                      "id": 1,
-                      "name": "root"
-                  },
-                  "name": "Bob",
-                  "surname": "Smith",
-                  "login": "bob1",
-                  "password": "qwerty"
-              },
-              "company": {
-                  "id": 1,
-                  "name": "root"
-              },
-              "projecting_stage": "212",
-              "start_date": "2024-08-14",
-              "end_date": "2024-08-18",
-              "address": "ТМ 1: ыв 12, 231, 1",
-              "contact_number": "89112223344",
-              "latitude": this.latitude,
-              "longitude": this.longitude,
-              "is_deleted": false
-          })
-        })
-
-        const jsonData = await response.json()
-        console.log(jsonData)
-        this.getAllProjects()
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    showProjectsOnMap(){
-      this.getAllProjects().then(() => {
-
-      ymaps.ready(() => {
-      var myMap = new ymaps.Map("map", {
-        center: [59.942249, 30.314476],
-        zoom: 10
-      }, {
-        searchControlProvider: 'yandex#search'
-      });
-
-      console.log(this.projects) // should work now
-
-      for (const project of this.projects) {
-        var myPlacemark = new ymaps.Placemark([project.latitude, project.longitude], {
-          iconCaption: project.project_name
+    methods: {
+      getMap(){
+        ymaps.ready(() => {
+        var myMap = new ymaps.Map("map", {
+          center: [59.942249, 30.314476],
+          zoom: 10
         }, {
-          preset: 'islands#pinkDotIcon'
+          searchControlProvider: 'yandex#search'
         });
-
-        myMap.geoObjects.add(myPlacemark);
+        
+        for(const project of this.projects){
+          var myPlacemark = new ymaps.Placemark([project.latitude, project.longitude], {
+            iconCaption: project.number
+          }, {
+            preset: 'islands#pinkDotIcon'
+          });
+          myMap.geoObjects.add(myPlacemark);
+        }
+        })
+      },
+      addProject(){
+        this.projects.push({id: this.projects.length+1, number: this.number, project_name: this.projectName, description: this.description, latitude: this.latitude, longitude: this.longitude})
+        this.getMap()
       }
-      });
-      })
-      
     },
-    getGlobalToken(){
-      const globalToken = sessionStorage.getItem('globalToken')
-      this.token = globalToken
-      console.log(globalToken)
-    },
-    refreshProjectsOnMap(){
-      this.showProjectsOnMap()
+    mounted() {
+      this.getMap()
     }
-  },
-  mounted(){
-    this.getAllProjects()
-    this.showProjectsOnMap()
   }
-}
+
+  
 </script>
 
 <template>
@@ -287,13 +71,8 @@ export default {
           <div>
             <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#createProjectModal">Добавить</button>
           </div>
-          <div>
-            <button class="btn btn-secondary me-2" @click="getToken()">Получить токен</button>  
-          </div>
-          <div>
-            <input v-model="token" type="text" class="form-control" />
-          </div>
         </div>
+        <div class="overflow-y-auto" style="height: 50vh;">
           <table class="table table-sm table-bordered">
             <thead>
               <tr>
@@ -318,25 +97,28 @@ export default {
                 <td>{{ project.longitude }}</td>
                 <td>Employee</td>
                 <td>
-                  <button class="btn btn-light" @click="getSingleProject(project.id)" data-bs-toggle="modal" data-bs-target="#updateProjectModal">
+                  <button class="btn btn-light btn-sm"  data-bs-toggle="modal" data-bs-target="#updateProjectModal">
                     <img src="../assets/pencil.png" alt="">
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-secondary" :class="{'btn-success': projectId === project.id}" @click="selectProject(project.id)">
+                  <button class="btn btn-secondary btn-sm" >
                     Выбрать
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>  
       <div class="row mt-3">
-        <h5>Dashboard</h5>
-        <table class="table table-sm table-bordered">
+        <h5>Информация по текущему проекту:</h5>
+        <table class="table table-sm table-bordered ms-3">
           <tbody>
           <tr>
-            <td>Текущий проект:</td>
-            <td>100-24 / ИГИ1 / Строительство сарая</td>
+            <td>Описание:</td>
+            <td>
+              99999999
+            </td>
           </tr>
           <tr>
           <td>Номер уведомления КГА:</td>
@@ -395,7 +177,7 @@ export default {
             <div class="row">
               <div class="col-6">
                 <label for="">Номер<span class="text-danger">*</span></label>
-                <input class="form-control" type="text" />
+                <input v-model="number" class="form-control" type="text" />
               </div>
               <div class="col-6">
                 <label for="">Название</label>
@@ -405,7 +187,7 @@ export default {
             <div class="row">
               <div class="col-12">
                 <label for="">Описание</label>
-                <textarea class="form-control" rows="3" type="text"></textarea>
+                <textarea v-model="description" class="form-control" rows="3" type="text"></textarea>
               </div>
             </div>
             <div class="row">
@@ -431,7 +213,7 @@ export default {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button @click="createProject()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Добавить</button>
+            <button @click="addProject()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Добавить</button>
           </div>
       </div>
     </div>
@@ -484,8 +266,8 @@ export default {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button @click="deleteProject(projectId)" type="button" class="btn btn-danger" data-bs-dismiss="modal">Удалить</button>
-            <button @click="updateProject()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Сохранить</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Удалить</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Сохранить</button>
           </div>
       </div>
     </div>
