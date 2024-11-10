@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ProjectsView from '@/views/ProjectsView.vue'
+import ApplicationDescription from '@/components/main/ApplicationDescription.vue'
+import LoginView from '@/views/LoginView.vue'
+import RegisterView from '@/views/RegisterView.vue'
 import EmloyeeView from '@/views/EmloyeeView.vue'
+import AdminView from '@/views/AdminView.vue'
+import ProjectsView from '@/views/ProjectsView.vue'
 import PointsView from '@/views/PointsView.vue'
 import SamplesView from '@/views/SamplesView.vue'
 import EgesView from '@/views/EgesView.vue'
@@ -11,12 +15,32 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: ApplicationDescription
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView
+    },
+    {
       path: '/employee',
       name: 'employee',
       component: EmloyeeView
     },
     {
-      path: '/',
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
+    },
+    {
+      path: '/projects',
       name: 'projects',
       component: ProjectsView
     },    

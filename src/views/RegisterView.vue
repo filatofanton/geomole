@@ -3,18 +3,24 @@ export default {
   emits:['token', 'showHeader'],
   data() {
     return {
-      email: 'filatofanton@gmail.com',
-      password: '123456789',
+      companyId: 31,
+      name: '',
+      surname: '',
+      email: '',
+      password: '',
       token: '',
       err : null
     }
   },
   methods: {
-    async login() {
+    async register() {
       
-      const url = 'http://82.97.253.52:8080/auth/sign-in'
+      const url = 'http://82.97.253.52:8080/auth/sign-up'
       
       const body = { 
+        "company_id": null,
+        "name": null,
+        "surname": null,
         "login": this.email,
         "password": this.password,
       }
@@ -32,7 +38,7 @@ export default {
         this.$emit('token', responseData.token)
         this.$emit('showHeader', true)
         localStorage.setItem('currentSimpleTokenForUser', responseData.token)
-        // console.log(responseData)ь
+        // console.log(responseData)
         this.$router.push('/employee')
       } catch (e) {
         this.err = e.message
@@ -40,25 +46,37 @@ export default {
       }
 
     }
-  }
+  }  
 }
 </script>
 
 <template>
-<div class="container d-flex justify-content-center align-items-center" style="height: 80vh">
+  <div class="container d-flex justify-content-center align-items-center" style="height: 80vh">
     <div class="card" style="width: 300px">
       <div class="card-body">
-        <h5 class="text-center mb-3">Авторизация</h5>
-        <form @submit.prevent="login">
+        <h5 class="text-center mb-3">Регистрация</h5>
+        <form @submit.prevent="register">
+          <!-- <div class="mb-1">
+            <label for="company-id" class="form-label">Company ID</label>
+            <input v-model="companyId" type="number" class="form-control" id="company-id" disabled>
+          </div>
+          <div class="mb-1">
+            <label for="name" class="form-label">Имя</label>
+            <input v-model="name" type="text" class="form-control" id="name" required>
+          </div>
+          <div class="mb-1">
+            <label for="surname" class="form-label">Фамилия</label>
+            <input v-model="surname" type="text" class="form-control" id="surname" required>
+          </div> -->
           <div class="mb-1">
             <label for="email" class="form-label">Почта</label>
-            <input v-model="email" type="email" class="form-control" id="email" placeholder="email@domain.com" required>
+            <input v-model="email" type="email" class="form-control" id="email" required>
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Пароль</label>
+            <label for="password" class="form-label">Пароль (min 8)</label>
             <input v-model="password" type="password" class="form-control" id="password" required>
           </div>
-          <button type="submit" class="btn custom-btn w-100">Войти</button>
+          <button type="submit" class="btn custom-btn w-100">Зарегистрироваться</button>
         </form>
       </div>
     </div>

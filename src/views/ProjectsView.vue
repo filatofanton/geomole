@@ -5,10 +5,10 @@
         projects: [
           {"id": 1, "number": "421-58", "project_name": "Project 1", "description": "Lorem ipsum 1", "latitude": 59.973017, "longitude": 30.220557},
           {"id": 2, "number": "422-58", "project_name": "Project 2", "description": "Lorem ipsum 2", "latitude": 59.853, "longitude": 30.263},
-          {"id": 3, "number": "423-58", "project_name": "Project 3", "description": "Lorem ipsum 3", "latitude": 59.845, "longitude": 30.273},
+          {"id": 3, "number": "423-58", "project_name": "Project 3", "description": "Lorem ipsum 3", "latitude": 59.745, "longitude": 30.273},
           {"id": 4, "number": "424-58", "project_name": "Project 4", "description": "Lorem ipsum 4", "latitude": 59.833, "longitude": 30.213},
           {"id": 5, "number": "425-58", "project_name": "Project 5", "description": "Lorem ipsum 5", "latitude": 59.847, "longitude": 30.223},
-          {"id": 6, "number": "426-58", "project_name": "Project 6", "description": "Lorem ipsum 6", "latitude": 59.843, "longitude": 30.19},
+          {"id": 6, "number": "426-58", "project_name": "Project 6", "description": "Lorem ipsum 6", "latitude": 59.943, "longitude": 30.19},
           {"id": 7, "number": "427-58", "project_name": "Project 7", "description": "Lorem ipsum 7", "latitude": 59.842, "longitude": 30.18},
           {"id": 8, "number": "428-58", "project_name": "Project 8", "description": "Lorem ipsum 8", "latitude": 59.841, "longitude": 30.185},
           {"id": 9, "number": "429-58", "project_name": "Project 9", "description": "Lorem ipsum 9", "latitude": 59.840, "longitude": 30.187},
