@@ -55,8 +55,8 @@ export default {
     <div class="card" style="width: 300px">
       <div class="card-body">
         <h5 class="text-center mb-3">Регистрация</h5>
-        <form @submit.prevent="register">
-          <!-- <div class="mb-1">
+        <!-- <form @submit.prevent="register">
+          <div class="mb-1">
             <label for="company-id" class="form-label">Company ID</label>
             <input v-model="companyId" type="number" class="form-control" id="company-id" disabled>
           </div>
@@ -67,7 +67,7 @@ export default {
           <div class="mb-1">
             <label for="surname" class="form-label">Фамилия</label>
             <input v-model="surname" type="text" class="form-control" id="surname" required>
-          </div> -->
+          </div>
           <div class="mb-1">
             <label for="email" class="form-label">Почта</label>
             <input v-model="email" type="email" class="form-control" id="email" required>
@@ -77,7 +77,7 @@ export default {
             <input v-model="password" type="password" class="form-control" id="password" required>
           </div>
           <button type="submit" class="btn custom-btn w-100">Зарегистрироваться</button>
-        </form>
+        </form> -->
       </div>
     </div>
   </div>

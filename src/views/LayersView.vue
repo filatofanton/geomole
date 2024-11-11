@@ -105,12 +105,14 @@ export default {
                   <td></td>
                   <td>{{ getEgeData(layer.egeId).description }}</td>
                   <td>
-                    <button class="btn btn-sm btn-white">
-                      <img src="../assets/pencil.png">
-                    </button>
-                    <button class="btn btn-sm btn-white">
-                      <img src="../assets/delete.png">
-                    </button>
+                    <div class="d-flex">
+                      <button class="btn btn-sm btn-white">
+                        <img src="../assets/edit.png" width="24px">
+                      </button>
+                      <button class="btn btn-sm btn-white">
+                        <img src="../assets/delete.png" width="24px">
+                      </button>
+                    </div>
                   </td>
               </tr>
             </tbody>

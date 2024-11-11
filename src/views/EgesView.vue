@@ -63,10 +63,10 @@ export default {
               <td>{{ ege.decription }}</td>
               <td>
                 <button class="btn btn-sm btn-white">
-                  <img src="../assets/pencil.png">
+                  <img src="../assets/edit.png" width="24px">
                 </button>
                 <button @click="deleteEge(ege.id)" class="btn btn-sm btn-white">
-                  <img src="../assets/delete.png">
+                  <img src="../assets/delete.png" width="24px">
                 </button>
               </td>
             </tr>

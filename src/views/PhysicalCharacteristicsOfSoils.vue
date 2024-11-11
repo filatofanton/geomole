@@ -144,7 +144,7 @@ export default {
             </td>
             <td>
               <button class="btn btn-sm btn-light">
-                <img src="../assets/delete.png" alt="">
+                <img src="../assets/delete.png" alt="" width="24px">
               </button>
             </td>
             <td>{{ sample.egeId }}</td>

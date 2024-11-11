@@ -41,12 +41,12 @@
                   Вход
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#" @click.prevent="$router.push('/register')">
                   <img src="@/assets/register.png" width="24px" alt="Image alt text">
                   Регистрация
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#" @click.prevent="$router.push('/admin')">
                   <img src="@/assets/admin2.png" width="24px" alt="Image alt text">

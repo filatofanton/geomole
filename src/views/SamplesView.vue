@@ -95,7 +95,7 @@ export default {
       </div>
       <div>
         <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <img src="../assets/download.png" width="16px" height="16px"> Импорт CSV
+          <img src="../assets/download.png" width="24px"> Импорт CSV
         </button>
       </div>
       <div>
@@ -147,10 +147,10 @@ export default {
           <td>
             <div class="d-flex">
               <button @click="editSample(sample.id)" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#editSampleModal">
-                <img src="../assets/pencil.png" alt="">
+                <img src="../assets/edit.png" width="24px" alt="">
               </button>
               <button class="btn btn-sm btn-light" @click="removeSample(sample.id)">
-                <img src="../assets/delete.png" alt="">
+                <img src="../assets/delete.png" width="24px" alt="">
               </button>
             </div>
           </td>

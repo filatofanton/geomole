@@ -98,7 +98,7 @@
                 <td>Employee</td>
                 <td>
                   <button class="btn btn-light btn-sm"  data-bs-toggle="modal" data-bs-target="#updateProjectModal">
-                    <img src="../assets/pencil.png" alt="">
+                    <img src="../assets/edit.png" width="24px" alt="">
                   </button>
                 </td>
                 <td>
