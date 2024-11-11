@@ -3,24 +3,27 @@ export default {
   data() {
     return {
       users: [
-        {id: 1, name: 'Иван', surname: 'Иванов', email: '1@1.1', company: '1', status: 'active', finish: '20.12.2024', subscription: ''},
-        {id: 2, name: 'Петр', surname: 'Петров', email: '2@2.2', company: '2', status: 'new', finish: '', subscription: '1'},
-        {id: 3, name: 'Сидор', surname: 'Сидоров', email: '3@3.3', company: '1', status: 'active', finish: '01.03.2025', subscription: ''},
-        {id: 4, name: 'Василий', surname: 'Васильев', email: '4@4.4', company: '4', status: 'active', finish: '10.11.2024', subscription: ''},
-        {id: 5, name: 'Павел', surname: 'Павлов', email: '5@5.5', company: '5', status: 'new', finish: '', subscription: '12'},
-        {id: 6, name: 'Александр', surname: 'Александров', email: '6@6.6', company: '2', status: 'new', finish: '', subscription: '3'},
-        {id: 7, name: 'Максим', surname: 'Максимов', email: '7@7.7', company: '4', status: 'new', finish: '', subscription: '3'},
-        {id: 8, name: 'Дмитрий', surname: 'Дмитриев', email: '8@8.8', company: '5', status: 'new', finish: '', subscription: '12'},
-        {id: 9, name: 'Николай', surname: 'Николаев', email: '9@9.9', company: '7', status: 'new', finish: '', subscription: '1'},
-        {id: 10, name: 'Михаил', surname: 'Михаилов', email: '10@10.10', company: '7', status: 'new', finish: '', subscription: '3'},
+        {id: 1, name: 'Иван', surname: 'Иванов', email: '1@1.1', company: '1', status: 'active', finish: '20.12.2024', subscription: '', subscriptions: [{id:1,period:'3',until:'20.12.2024',status:'active'}, {id:2,until:'01.11.2024',status:'ended'}, {id:3,until:'01.11.2024',status:'rejected'}]},
+        {id: 2, name: 'Петр', surname: 'Петров', email: '2@2.2', company: '2', status: 'new', finish: '', subscription: '1', subscriptions: [{id:1,period:'1',until:'20.12.2024',status:'new'}]},
+        {id: 3, name: 'Сидор', surname: 'Сидоров', email: '3@3.3', company: '1', status: 'active', finish: '01.03.2025', subscription: '', subscriptions: [{id:1,period:'3',until:'25.11.2024',status:'active'}, {id:2,until:'01.11.2024',status:'ended'}]},
+        {id: 4, name: 'Василий', surname: 'Васильев', email: '4@4.4', company: '4', status: 'active', finish: '10.11.2024', subscription: '', subscriptions:[{id:1,period:'1',until:'25.12.2024',status:'active'}]},
+        {id: 5, name: 'Петр1', surname: 'Петров', email: '22@2.2', company: '4', status: 'new', finish: '', subscription: '12', subscriptions: [{id:1,period:'12',until:'20.12.2024',status:'new'}]},
       ],
-      user: null
+      userSubscriptions: null
     }
   },
   methods: {
     selectUser(user) {
-      this.user = user
-      console.log(this.user)
+      this.userSubscriptions = user.subscriptions ?? null
+      console.log(this.userSubscriptions)
+    },
+    active(userSubscription) {
+      userSubscription.status = 'active'
+      console.log(userSubscription)
+    },
+    rejected(userSubscription) {
+      userSubscription.status = 'rejected'
+      console.log(userSubscription)
     }
   }
 }
@@ -70,30 +73,23 @@ export default {
       <thead>
         <tr>
           <th>id</th>
-          <th>Имя</th>
-          <th>Фамилия</th>
-          <th>Почта</th>
-          <th>Компания</th>
-          <th>Стутус</th>
-          <th>Подписка до</th>
-          <th>Запрос подписки</th>
-          <th>Все подписки</th>
+          <th>Период</th>
+          <th>Срок действия</th>
+          <th>Статус</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.surname }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.company }}</td>
-          <td>{{ user.status }}</td>
-          <td>{{ user.finish }}</td>
-          <td>{{ user.subscription }}</td>
+        <tr v-for="userSubscription in userSubscriptions" :key="userSubscription.id">
+          <td>{{ userSubscription.id }}</td>
+          <td>{{ userSubscription.period }}</td>
+          <td>{{ userSubscription.until }}</td>
+          <td>{{ userSubscription.status }}</td>
           <td>
-            <button class="btn btn-sm btn-secondary">
-              Выбрать
-            </button>
+            <div class="d-flex">
+              <button class="btn btn-sm btn-primary me-2" @click="active(userSubscription)">Activate</button>
+              <button class="btn btn-sm btn-danger" @click="rejected(userSubscription)">Rejected</button>
+            </div>
           </td>
         </tr>
       </tbody>
