@@ -1,10 +1,14 @@
 <script>
-
+export default {
+  props: {
+    currentProject: Object
+  }
+}
 </script>
 
 <template>
   <footer class="footer fixed-bottom text-bg-dark p-1" style="height: 30px;">
-    <span class="text-center"> Текущий проект: id - 123  Название - 123</span>
+    <span class="text-center"> Текущий проект: {{ currentProject }}</span>
   </footer>
 </template>
 

@@ -1,5 +1,7 @@
 <script>
+
   export default {
+    emits: ['currentProject'],
     data(){
       return {
         projects: [
@@ -50,8 +52,22 @@
         })
       },
       addProject(){
-        this.projects.push({id: this.projects.length+1, number: this.number, project_name: this.projectName, description: this.description, latitude: this.latitude, longitude: this.longitude})
-        this.getMap()
+        this.projects.push({
+          id: this.projects.length + 1, 
+          number: this.number, 
+          project_name: this.projectName + ' ' + this.projects.length, 
+          description: this.description, 
+          latitude: this.latitude, 
+          longitude: this.longitude})
+      },
+      editProject(project){
+        this.currentProject = project
+        console.log(project)
+      },
+
+      selectProject(project){
+        this.currentProject = project
+        this.$emit('currentProject', project)
       }
     },
     mounted() {
@@ -97,12 +113,12 @@
                 <td>{{ project.longitude }}</td>
                 <td>Employee</td>
                 <td>
-                  <button class="btn btn-light btn-sm"  data-bs-toggle="modal" data-bs-target="#updateProjectModal">
+                  <button @click="editProject(project)" class="btn btn-light btn-sm"  data-bs-toggle="modal" data-bs-target="#updateProjectModal">
                     <img src="../assets/edit.png" width="24px" alt="">
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-secondary btn-sm" >
+                  <button class="btn btn-sm" :class="project.id == currentProject?.id ? 'btn-primary' : 'btn-secondary'" @click="selectProject(project)">
                     Выбрать
                   </button>
                 </td>

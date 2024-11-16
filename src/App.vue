@@ -10,12 +10,17 @@ export default {
   data() {
     return {
       showHeader: false,
-      token: ''
+      token: '',
+      currentProject: null,
     }
   },
   methods: {
     addTokenToUser(){
       localStorage.setItem('globalToken', this.token)
+    },
+    selectedProject(project){
+      this.currentProject = project
+      console.log(project)
     }
   }
 }
@@ -25,9 +30,9 @@ export default {
   <div v-if="showHeader">
     <Header :showHeader="showHeader" @logout="showHeader = $event" />
     <div class="container-fluid">
-      <RouterView />
+      <RouterView @currentProject="selectedProject" />
     </div>
-    <Footer />
+    <Footer :currentProject="currentProject" />
   </div>
   <div v-else>
     <HeaderAuth :showHeader="showHeader" @login="showHeader = $event" />
