@@ -9,7 +9,6 @@ export default {
         {id:4,type:'скважина',number:'134',depth:'40',absMark:'0.5'}
       ],
       eges: [
-        {id:1, number:'111', genesis:'tIV', description:"Насыпные грунты, слежавшиеся: пески разной крупности, перемешанные со строительным мусором (обломки кирпичей, бетона, древесины, лом металла, осколки стекла, шлак углей), с гравием и галькой до 15-20%, с примесью органических веществ, влажные и водонасыщенные. Срок отсыпки более 5 лет."},
         {id:2, number:'222', genesis:'m, l IV', description:'Пески пылеватые, плотные, неоднородные, серые и серовато-коричневые, влажные и водонасыщенные, с растительными остатками'},
         {id:3, number:'222а', genesis:'m, l IV', description:'Пески пылеватые, средней плотности, неоднородные, серые и сероватокоричневые, влажные и водонасыщенные, с растительными остатками.'},
         {id:4, number:'333', genesis:'lg III', description:'Суглинки тяжелые пылеватые, текучие, с прослоями текучепластичных, ленточные, тиксотропные, коричневые и серовато-коричневые, с прослоями песков пылеватых, водонасыщенных.'},
@@ -69,6 +68,9 @@ export default {
       if(waterContents.length == 0) return null;
       const average = sum / waterContents.length;
       return average.toFixed(3);
+    },
+    printPage() {
+      window.print();
     }
   },
 
@@ -87,201 +89,219 @@ export default {
 
 <template>
 <!-- <p>{{  }}</p> -->
-<div class="row m-3">
-    <h5 class="me-2 align-self-center">Состав и физические характеристики грунтов</h5>
-    <div class="d-flex mb-2">
-      <div>
-        <select v-model="selectedEge" class="form-select">
-          <option v-for="ege in eges" :key="ege.id" :value="ege">ИГЭ-{{ ege.number }}: {{ ege.genesis }} {{ ege.description.substring(0, 20) }}...</option>
+<h5 class="me-2 align-self-center">Состав и физические характеристики грунтов</h5>
+<div class="row mb-3">
+  <div class="col-5">
+    <select v-model="selectedEge" class="form-select">
+      <option v-for="ege in eges" :key="ege.id" :value="ege">ИГЭ-{{ ege.number }}: {{ ege.genesis }} {{ ege.description.substring(0, 60) }}...</option>
+    </select>
+  </div>
+  <div class="col-6 ms-auto">
+    <div class="d-flex align-items-center">
+      <span class="me-1">Шаблон для печати:</span>
+      <div class="me-2">
+        <select class="form-select">
+          <option value="A4">A3 штамп 420*297</option>
+          <option value="A4_border">A2 штамп 694*420</option>
         </select>
       </div>
-    </div>
-    <div class="overflow-y-auto" style="height: 90vh;">
-      <table class="table table-sm table-bordered tbCustom">
-        <thead>
-          <tr>
-            <th class="width-50">Select</th>
-            <th class="width-50">Action</th>
-            <th class="width-50">ИГЭ</th>
-            <th class="width-50">Номер</th>
-            <th class="width-50">Выработка</th>
-            <th class="width-50">Глубина отбора, м</th>
-            <th colspan="12">Содержание фракций грунта, %, размерами, мм</th>
-            <th>Плотность, г/см<sup>3</sup></th>
-            <th>Влажность, д.е.</th>
-            <th>...</th>
-          </tr>
-          <tr>
-            <th>sel</th>
-            <th>act</th>
-            <th>ege</th>
-            <th><i>№</i></th>
-            <th></th>
-            <th><i>h, м</i></th>
-            <th><i>X<sub>10</sub></i></th>
-            <th><i>X<sub>10-5</sub></i></th>
-            <th><i>X<sub>5-2</sub></i></th>
-            <th><i>X<sub>2-1</sub></i></th>
-            <th><i>X<sub>1-0.5</sub></i></th>
-            <th><i>X<sub>0.5-0.25</sub></i></th>
-            <th><i>X<sub>0.25-0.1</sub></i></th>
-            <th><i>X<sub>0.1-0.05</sub></i></th>
-            <th><i>X<sub>0.05-0.01</sub></i></th>
-            <th><i>X<sub>0.01-0.002</sub></i></th>
-            <th><i>X<sub>0.002</sub></i></th>
-            <th><i>&#931;</i></th>
-            <th><i>ρ, г/см<sup>3</sup></i></th>
-            <th><i>W, д.е.</i></th>
-            <th><i>...</i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="sample in samplesByEge" :key="sample.id">
-            <td>
-              <div>
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </div>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-light">
-                <img src="../assets/delete.png" alt="" width="24px">
-              </button>
-            </td>
-            <td>{{ sample.egeId }}</td>
-            <td>{{ sample.number }}</td>
-            <td>{{ sample.boreholeId }}</td>
-            <td>{{ sample.depth }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ sample.density }}</td>
-            <td>{{ sample.waterContent }}</td>
-            <td>...</td>
-          </tr>
-        </tbody>
-        <tfoot class="footerText">
-          <tr>
-            <td colspan="6" class="text-end footerText">Среднее:</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ averageDensity() }}</td>
-            <td>{{ averageWaterContent() }}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="6" class="text-end">Мин.:</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="6" class="text-end">Макс.:</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="6" class="text-end">Число определний (мин.: 6):</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="5" rowspan="2" class="text-end">Расчетное значение для доверительной вероятности:</td>
-            <td>0.85</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>0.95</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
+      <div class="me-2">
+        <select class="form-select">
+          <option value="A4">Печать текущего ИГЭ</option>
+          <option value="A4_border">Печать всех ИГЭ</option>
+        </select>
+      </div>
+      <button @click="printPage" class="btn btn-success">*.pdf</button>
     </div>
   </div>
+  <div class="row mt-2">
+    <div class="overflow-y-auto" style="height: 90vh;">
+  <table class="table table-sm table-bordered tbCustom">
+    <thead>
+      <tr>
+        <th class="width-50">Select</th>
+        <th class="width-50">Action</th>
+        <th class="width-50">ИГЭ</th>
+        <th class="width-50">Номер</th>
+        <th class="width-50">Выработка</th>
+        <th class="width-50">Глубина отбора, м</th>
+        <th colspan="12">Содержание фракций грунта, %, размерами, мм</th>
+        <th>Плотность, г/см<sup>3</sup></th>
+        <th>Влажность, д.е.</th>
+        <th>...</th>
+      </tr>
+      <tr>
+        <th>sel</th>
+        <th>act</th>
+        <th>ege</th>
+        <th><i>№</i></th>
+        <th></th>
+        <th><i>h, м</i></th>
+        <th><i>X<sub>10</sub></i></th>
+        <th><i>X<sub>10-5</sub></i></th>
+        <th><i>X<sub>5-2</sub></i></th>
+        <th><i>X<sub>2-1</sub></i></th>
+        <th><i>X<sub>1-0.5</sub></i></th>
+        <th><i>X<sub>0.5-0.25</sub></i></th>
+        <th><i>X<sub>0.25-0.1</sub></i></th>
+        <th><i>X<sub>0.1-0.05</sub></i></th>
+        <th><i>X<sub>0.05-0.01</sub></i></th>
+        <th><i>X<sub>0.01-0.002</sub></i></th>
+        <th><i>X<sub>0.002</sub></i></th>
+        <th><i>&#931;</i></th>
+        <th><i>ρ, г/см<sup>3</sup></i></th>
+        <th><i>W, д.е.</i></th>
+        <th><i>...</i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="sample in samplesByEge" :key="sample.id">
+        <td>
+          <div>
+            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-light">
+            <img src="../assets/delete.png" alt="" width="24px">
+          </button>
+        </td>
+        <td>{{ sample.egeId }}</td>
+        <td>{{ sample.number }}</td>
+        <td>{{ sample.boreholeId }}</td>
+        <td>{{ sample.depth }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ sample.density }}</td>
+        <td>{{ sample.waterContent }}</td>
+        <td>...</td>
+      </tr>
+    </tbody>
+    <tfoot class="footerText">
+      <tr>
+        <td colspan="6" class="text-end footerText">Среднее:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ averageDensity() }}</td>
+        <td>{{ averageWaterContent() }}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="text-end">Мин.:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="text-end">Макс.:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="text-end">Число определний (мин.: 6):</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="5" rowspan="2" class="text-end">Расчетное значение для доверительной вероятности:</td>
+        <td>0.85</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>0.95</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+  </div>
+</div>
 </template>
 
 <style scoped>

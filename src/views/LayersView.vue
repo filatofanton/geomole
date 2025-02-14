@@ -36,6 +36,9 @@ export default {
   methods: {
     getEgeData(egeId) {
       return this.eges.find(ege => ege.id === egeId);
+    },
+    printPage() {
+      window.print();
     }
   },
   mounted() {
@@ -70,9 +73,28 @@ export default {
       <div class="ms-3">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createLayerModal">Добавить слой</button>
       </div>
+      <div class="ms-3 ms-auto">
+        <div class="d-flex align-items-center">
+          <span class="me-1">Шаблон для печати:</span>
+          <div class="me-2">
+            <select class="form-select">
+              <option value="A4">A4 штамп 297*210</option>
+              <option value="A4_border">A4*2 штамп 297*420</option>
+              <option value="A4_border">A4 297*210</option>
+            </select>
+          </div>
+          <div class="me-2">
+            <select class="form-select">
+              <option value="A4">Печать текущей колонки</option>
+              <option value="A4_border">Печать всех колонок</option>
+            </select>
+          </div>
+          <button @click="printPage" class="btn btn-success">*.pdf</button>
+        </div>
+      </div>
     </div>
     <div class="row m-0">
-      <div class="col-8">
+      <div class="col-8 no-print">
         <div class="overflow-y-auto" style="height: 500px;">
           <table class="table table-sm table-bordered tbCustom">
             <thead>
@@ -119,12 +141,12 @@ export default {
           </table>
         </div>  
       </div>
-      <div class="col-2 border">
+      <div class="col-2 border printable-area">
         Колонка
         <img src="../assets/section.png" width="300px">
       </div>
-      <div class="col-2 border">
-        Статичсекое зондирование
+      <div class="col-2 border no-print">
+        Статическое зондирование
         <img src="../assets/cpt.png" width="300px">
       </div>
     </div>
@@ -167,3 +189,10 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+</style>

@@ -1,31 +1,47 @@
 <script>
+
   export default{
+    props: {
+      selectedProject: Object
+    },
     data(){
       return {
         points:[
-            {id:1,type:'скважина',number:'111',depth:'30',absMark:'-1.2',
+            {id:1,project_id:1,type:'скважина',number:'111',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
             coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:2,type:'скважина',number:'112',depth:'25',absMark:'-1.2',
+            {id:2,project_id:1,type:'скважина',number:'112',depth:'25',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
             coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:3,type:'скважина',number:'122',depth:'35',absMark:'-1.2',
+            {id:3,project_id:1,type:'скважина',number:'122',depth:'35',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
             coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:4,type:'скважина',number:'125',depth:'25',absMark:'-1.2',
+            {id:4,project_id:2,type:'скважина',number:'125',depth:'25',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
             coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:5,type:'скважина',number:'131',depth:'30',absMark:'-1.2',
+            {id:5,project_id:2,type:'скважина',number:'131',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
             coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:6,type:'т.с.з.',number:'1',depth:'30',absMark:'-1.2',
+            {id:6,project_id:2,type:'т.с.з.',number:'1',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
             coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:7,type:'т.с.з.',number:'2',depth:'30',absMark:'-1.2',
+            {id:7,project_id:2,type:'т.с.з.',number:'2',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
             coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-        ]
+        ],
+        filteredPoints: [],
       }
+    },
+    methods: {
+      filterSampleByProject(){
+        this.filteredPoints = points.filter(point => point.project_id === currentProject.id);
+        console.log(this.filteredPoints)
+      },
+      printPage() {
+        window.print();
+      }
+    },
+    mounted() {
     }
   }
 </script>
@@ -40,6 +56,25 @@
             Добавить
           </button>
         </div>
+        <div class="ms-3 ms-auto">
+        <div class="d-flex align-items-center">
+          <span class="me-1">Шаблон для печати:</span>
+          <div class="me-2">
+            <select class="form-select">
+              <option value="A4">A4 штамп 297*210</option>
+              <option value="A4_border">A4</option>
+            </select>
+          </div>
+          <div class="me-2">
+            <select class="form-select">
+              <option value="A4">Печать всех выработок</option>
+              <option value="A4_border">Печать только скважин</option>
+              <option value="A4_border">Печать только т.с.з.</option>
+            </select>
+          </div>
+          <button @click="printPage" class="btn btn-success">*.pdf</button>
+        </div>
+      </div>
       </div>
       <div class="overflow-y-auto" style="height: 500px;">
         <table class="table table-sm table-bordered tbCustom">

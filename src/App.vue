@@ -18,6 +18,7 @@ export default {
     addTokenToUser(){
       localStorage.setItem('globalToken', this.token)
     },
+
     selectedProject(project){
       this.currentProject = project
       console.log(project)
@@ -30,7 +31,7 @@ export default {
   <div v-if="showHeader">
     <Header :showHeader="showHeader" @logout="showHeader = $event" />
     <div class="container-fluid">
-      <RouterView @currentProject="selectedProject" />
+      <RouterView @currentProject="selectedProject" :selectedProject="currentProject"/>
     </div>
     <Footer :currentProject="currentProject" />
   </div>

@@ -48,7 +48,7 @@ export default {
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="points.html" @click.prevent="$router.push('/points')">Список выработок</a></li>
-                  <li><a class="dropdown-item" href="#">Статическое зондирование</a></li>
+                  <li><a class="dropdown-item" href="#" @click.prevent="$router.push('/cpt')">Статическое зондирование</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">

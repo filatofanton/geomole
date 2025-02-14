@@ -6,6 +6,7 @@ import EmloyeeView from '@/views/EmloyeeView.vue'
 import AdminView from '@/views/AdminView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
 import PointsView from '@/views/PointsView.vue'
+import CptView from '@/views/CptView.vue'
 import SamplesView from '@/views/SamplesView.vue'
 import EgesView from '@/views/EgesView.vue'
 import LayersView from '@/views/LayersView.vue'
@@ -48,6 +49,11 @@ const router = createRouter({
       path: '/points',
       name: 'points',
       component: PointsView
+    },
+    {
+      path: '/cpt',
+      name: 'cpt',
+      component: CptView
     },
     {
       path: '/samples',
