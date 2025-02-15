@@ -87,8 +87,7 @@ export default {
             <tr>
               <th style="width: 30px">Номер</th>
               <th style="width: 150px">Генезис</th>
-              <th style="width: 100px">Штриховка</th>
-              <th style="width: 200px">Штриховка</th>
+              <th style="width: 300px">Штриховка</th>
               <th>Описание</th>
               <th style="width: 100px">Action</th>
             </tr>
@@ -97,9 +96,9 @@ export default {
             <tr v-for="ege in eges" :key="ege.id">
               <td>{{ ege.number }}</td>
               <td>{{ ege.genesis }}</td>
-              <td><img :src="ege.selectedHatching" height="50px"></td>
               <td>
                 <div class="d-flex align-items-center">
+                  <img class="me-2" :src="ege.selectedHatching" height="50px">
                   <select v-model="ege.selectedHatchingId" @change="updateSelectedHatching(ege)" class="form-select">
                     <option v-for="hatch in hatching" :key="hatch.id" :value="hatch.id">
                       {{ hatch.name }}
