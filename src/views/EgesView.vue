@@ -1,4 +1,19 @@
 <script>
+import techno from '../assets/hatch/techno.png';
+import peat from '../assets/hatch/peat.png';
+import dusty_sand from '../assets/hatch/dusty_sand.png';
+import fine_sand from '../assets/hatch/fine_sand.png';
+import medium_sand from '../assets/hatch/medium_sand.png';
+import coarse_sand from '../assets/hatch/coarse_sand.png';
+import gravel_sand from '../assets/hatch/gravel_sand.png';
+import sandy_clay from '../assets/hatch/sandy_clay.png';
+import sandy_clay_gravel from '../assets/hatch/sandy_clay_gravel.png';
+import silty_clay from '../assets/hatch/silty_clay.png';
+import silty_clay_gravel from '../assets/hatch/silty_clay_gravel.png';
+import clay from '../assets/hatch/clay.png';
+import limestone from '../assets/hatch/limestone.png';
+import granite from '../assets/hatch/granite.png';
+
 export default {
   data() {
     return {
@@ -9,9 +24,25 @@ export default {
         {id:4, number:'3', genesis:'lg III', decription:'Суглинки тяжелые пылеватые, текучие, с прослоями текучепластичных, ленточные, тиксотропные, коричневые и серовато-коричневые, с прослоями песков пылеватых, водонасыщенных.'},
         {id:5, number:'6', genesis:'g III', decription:'Супеси пылеватые, пластичные (Il>0,50), серые, с линзами и гнездами песков разной крупности, с гравием и галькой изверженных пород до 10-15 %, с отдельными валунами.'},
       ],
+      hatching:[
+        {id:1,name:'Насыпной грунт',img: techno},
+        {id:2,name:'Торф',img: peat},
+        {id:3,name:'Песок пылеватый',img: dusty_sand},
+        {id:4,name:'Песок мелкий',img: fine_sand},
+        {id:5,name:'Песок средней кр.',img: medium_sand},
+        {id:6,name:'Песок крупный',img: coarse_sand},
+        {id:7,name:'Песок гравелистый',img: gravel_sand},
+        {id:8,name:'Супесь',img: sandy_clay},
+        {id:9,name:'Супесь моренная',img: sandy_clay_gravel},
+        {id:10,name:'Суглинок',img: silty_clay},
+        {id:11,name:'Суглинок моренный',img: silty_clay_gravel},
+        {id:12,name:'Глина',img: clay},
+        {id:13,name:'Известняк',img: limestone},
+        {id:14,name:'Гранит',img: granite},
+      ],
       number: '',
       genesis: '',
-      decription: ''
+      decription: '',
     }
   },
 
@@ -21,7 +52,9 @@ export default {
       id: this.eges.length+1, 
       number: this.number, 
       genesis: this.genesis, 
-      decription: this.decription
+      decription: this.decription,
+      selectedHatchingId: null,
+      selectedHatching: null,
     })
     this.number = ''
     this.genesis = ''
@@ -29,9 +62,11 @@ export default {
     },
     deleteEge(id) {
       this.eges = this.eges.filter(ege => ege.id != id)
+    },
+    updateSelectedHatching(ege) {
+      ege.selectedHatching = this.hatching.find(hatch => hatch.id === ege.selectedHatchingId)?.img || null;
     }
-  }
-
+  },
 }
 </script>
 
@@ -52,6 +87,8 @@ export default {
             <tr>
               <th style="width: 30px">Номер</th>
               <th style="width: 150px">Генезис</th>
+              <th style="width: 100px">Штриховка</th>
+              <th style="width: 200px">Штриховка</th>
               <th>Описание</th>
               <th style="width: 100px">Action</th>
             </tr>
@@ -60,6 +97,16 @@ export default {
             <tr v-for="ege in eges" :key="ege.id">
               <td>{{ ege.number }}</td>
               <td>{{ ege.genesis }}</td>
+              <td><img :src="ege.selectedHatching" height="50px"></td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <select v-model="ege.selectedHatchingId" @change="updateSelectedHatching(ege)" class="form-select">
+                    <option v-for="hatch in hatching" :key="hatch.id" :value="hatch.id">
+                      {{ hatch.name }}
+                    </option>
+                  </select>
+                </div>
+              </td>
               <td>{{ ege.decription }}</td>
               <td>
                 <button class="btn btn-sm btn-white">
