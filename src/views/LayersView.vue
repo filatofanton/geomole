@@ -1,4 +1,10 @@
 <script>
+import plast_sredn_mp from '../assets/hatch/plast_sredn_mp.png';
+import polutv from '../assets/hatch/polutv.png';
+import tecucheplast from '../assets/hatch/tecucheplast.png';
+import tekuch_vodonas from '../assets/hatch/tekuch_vodonas.png';
+import tugoplast from '../assets/hatch/tugoplast.png';
+import tv_sredn_step from '../assets/hatch/tv_sredn_step.png';
 export default {
   data() {
     return {
@@ -27,9 +33,22 @@ export default {
         {id:9,pointId:2,egeId:4,bottomDepth:23.8},
         {id:10,pointId:2,egeId:5,bottomDepth:25}
       ],
-
+      consistancy: [
+        {id:1,name:'твердая',img:tv_sredn_step},
+        {id:2,name:'полутвердая',img:polutv},
+        {id:3,name:'тугопластичная',img:tugoplast},
+        {id:4,name:'пластичная',img:plast_sredn_mp},
+        {id:5,name:'мягкопластичная',img:plast_sredn_mp},
+        {id:6,name:'текучепластичная',img:tecucheplast},
+        {id:7,name:'текучая',img:tekuch_vodonas},
+        {id:8,name:'малой степени водонасыщения',img:tv_sredn_step},
+        {id:9,name:'средней степени водонасыщения',img:plast_sredn_mp},
+        {id:10,name:'водонасыщенные',img:tekuch_vodonas}
+      ],
       selectedPoint: null,
       selectedEge: null,
+      selectedCons1: null,
+      selectedCons2: null,
       layersByPoint: null,
     }
   },
@@ -94,8 +113,9 @@ export default {
       </div>
     </div>
     <div class="row m-0">
-      <div class="col-8 no-print">
+      <div class="col-12 no-print">
         <div class="overflow-y-auto" style="height: 500px;">
+          <div class="table-responsive">
           <table class="table table-sm table-bordered tbCustom">
             <thead>
               <tr>
@@ -108,6 +128,7 @@ export default {
                   <th>А.о. кровли</th>
                   <th>А.о. подошвы</th>
                   <th>Описание</th>
+                  <th colspan="3">Ст. водонас./Консист.</th>
                   <th>Action</th>
               </tr>
             </thead>
@@ -126,6 +147,17 @@ export default {
                   <td></td>
                   <td></td>
                   <td>{{ getEgeData(layer.egeId).description }}</td>
+                  <td><input type="text" class="form-control" placeholder="Разделитель"></td>
+                  <td>
+                    <select v-model="selectedCons1" name="" id="" class="form-select">
+                      <option v-for="cons in consistancy" :key="cons.id" :value="cons">{{ cons.name }}</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select v-model="selectedCons1" name="" id="" class="form-select">
+                      <option v-for="cons in consistancy" :key="cons.id" :value="cons">{{ cons.name }}</option>
+                    </select>
+                  </td>
                   <td>
                     <div class="d-flex">
                       <button class="btn btn-sm btn-white">
@@ -139,16 +171,17 @@ export default {
               </tr>
             </tbody>
           </table>
+        </div>
         </div>  
       </div>
-      <div class="col-2 border printable-area">
+      <!-- <div class="col-2 border printable-area">
         Колонка
         <img src="../assets/section.png" width="300px">
       </div>
       <div class="col-2 border no-print">
         Статическое зондирование
         <img src="../assets/cpt.png" width="300px">
-      </div>
+      </div> -->
     </div>
   </div>
 

@@ -38,6 +38,8 @@ export default {
     }
   }
 }
+//оффсет по муфте
+//qc fs 
 </script>
 <template>
   <div class="row mb-3">

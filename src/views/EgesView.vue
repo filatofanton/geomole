@@ -13,6 +13,12 @@ import silty_clay_gravel from '../assets/hatch/silty_clay_gravel.png';
 import clay from '../assets/hatch/clay.png';
 import limestone from '../assets/hatch/limestone.png';
 import granite from '../assets/hatch/granite.png';
+import plast_sredn_mp from '../assets/hatch/plast_sredn_mp.png';
+import polutv from '../assets/hatch/polutv.png';
+import tecucheplast from '../assets/hatch/tecucheplast.png';
+import tekuch_vodonas from '../assets/hatch/tekuch_vodonas.png';
+import tugoplast from '../assets/hatch/tugoplast.png';
+import tv_sredn_step from '../assets/hatch/tv_sredn_step.png';
 
 export default {
   data() {
@@ -40,6 +46,18 @@ export default {
         {id:13,name:'Известняк',img: limestone},
         {id:14,name:'Гранит',img: granite},
       ],
+      consistancy: [
+        {id:1,name:'твердая',img:tv_sredn_step},
+        {id:2,name:'полутвердая',img:polutv},
+        {id:3,name:'тугопластичная',img:tugoplast},
+        {id:4,name:'пластичная',img:plast_sredn_mp},
+        {id:5,name:'мягкопластичная',img:plast_sredn_mp},
+        {id:6,name:'текучепластичная',img:tecucheplast},
+        {id:7,name:'текучая',img:tekuch_vodonas},
+        {id:8,name:'малой степени водонасыщения',img:tv_sredn_step},
+        {id:9,name:'средней степени водонасыщения',img:plast_sredn_mp},
+        {id:10,name:'водонасыщенные',img:tekuch_vodonas}
+      ],
       number: '',
       genesis: '',
       decription: '',
@@ -55,6 +73,8 @@ export default {
       decription: this.decription,
       selectedHatchingId: null,
       selectedHatching: null,
+      selectedConsistencyId: null,
+      selectedConsistency: null,
     })
     this.number = ''
     this.genesis = ''
@@ -65,6 +85,9 @@ export default {
     },
     updateSelectedHatching(ege) {
       ege.selectedHatching = this.hatching.find(hatch => hatch.id === ege.selectedHatchingId)?.img || null;
+    },
+    updateSelectedConsistency(ege) {
+      ege.selectedConsistency = this.consistancy.find(cons => cons.id === ege.selectedConsistencyId)?.img || null;
     }
   },
 }
@@ -88,6 +111,7 @@ export default {
               <th style="width: 30px">Номер</th>
               <th style="width: 150px">Генезис</th>
               <th style="width: 300px">Штриховка</th>
+              <th style="width: 300px">Ст. водонас. / Консистенция</th>
               <th>Описание</th>
               <th style="width: 100px">Action</th>
             </tr>
@@ -102,6 +126,16 @@ export default {
                   <select v-model="ege.selectedHatchingId" @change="updateSelectedHatching(ege)" class="form-select">
                     <option v-for="hatch in hatching" :key="hatch.id" :value="hatch.id">
                       {{ hatch.name }}
+                    </option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img class="me-2" :src="ege.selectedConsistency" height="50px">
+                  <select v-model="ege.selectedConsistencyId" @change="updateSelectedConsistency(ege)" class="form-select">
+                    <option v-for="cons in consistancy" :key="cons.id" :value="cons.id">
+                      {{ cons.name }}
                     </option>
                   </select>
                 </div>
