@@ -1,5 +1,4 @@
 <script>
-
   export default{
     props: {
       selectedProject: Object
@@ -7,25 +6,34 @@
     data(){
       return {
         points:[
-            {id:1,project_id:1,type:'скважина',number:'111',depth:'30',absMark:'-1.2',
+            {id:1,project_id:1,type:'скважина',number:'1',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
-            coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:2,project_id:1,type:'скважина',number:'112',depth:'25',absMark:'-1.2',
+            coneArea:'', startDiameter: '132', endDiameter: '2', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:2,project_id:1,type:'скважина',number:'2',depth:'25',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
-            coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:3,project_id:1,type:'скважина',number:'122',depth:'35',absMark:'-1.2',
+            coneArea:'', startDiameter: '132', endDiameter: '4', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:3,project_id:1,type:'скважина',number:'3',depth:'35',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
-            coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:4,project_id:2,type:'скважина',number:'125',depth:'25',absMark:'-1.2',
+            coneArea:'', startDiameter: '132', endDiameter: '6', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:4,project_id:2,type:'скважина',number:'4',depth:'25',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
-            coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
-            {id:5,project_id:2,type:'скважина',number:'131',depth:'30',absMark:'-1.2',
+            coneArea:'', startDiameter: '132', endDiameter: '7', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:5,project_id:2,type:'скважина',number:'5',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'УРБ 2А2',
-            coneArea:'', startDiameter: '132', endDiameter: '112', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            coneArea:'', startDiameter: '132', endDiameter: '8', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
             {id:6,project_id:2,type:'т.с.з.',number:'1',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
             coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
             {id:7,project_id:2,type:'т.с.з.',number:'2',depth:'30',absMark:'-1.2',
+            startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
+            coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:8,project_id:2,type:'т.с.з.',number:'3',depth:'30',absMark:'-1.2',
+            startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
+            coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:9,project_id:2,type:'т.с.з.',number:'4',depth:'30',absMark:'-1.2',
+            startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
+            coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
+            {id:10,project_id:2,type:'т.с.з.',number:'5',depth:'30',absMark:'-1.2',
             startDate:'2020-01-01',endDate:'2020-01-01',x:10,y:10,rigType:'Геотест',
             coneArea:'10 / 35.7', startDiameter: '', endDiameter: '', geologist:'Иванов И.И.', drillmaster: 'Петров П.П.'},
         ],
@@ -42,7 +50,12 @@
       }
     },
     mounted() {
-    }
+    },
+    computed: {
+    filteredPoints() {
+        return this.points.filter(point => point.type !== 'т.с.з.');
+      },
+    },
   }
 </script>
 
@@ -83,6 +96,7 @@
             <th>No.</th>
             <th>Тип</th>
             <th>Номер</th>
+            <th>Сопоставление с выработкой</th>
             <th>Глубина, м</th>
             <th>Отметка устья выработки, м</th>
             <th>Дата начала проходки</th>
@@ -103,6 +117,14 @@
               <td>{{ point.id }}</td>
               <td>{{ point.type }}</td>            
               <td>{{ point.number }}</td>
+              <td>
+                <select name="" id="" class="form-select" v-if="point.type === 'т.с.з.'">
+                  <option value="-">-</option>
+                  <option v-for="point in filteredPoints" :key="point.id" value="point.id">
+                    {{ point.type }} {{ point.number }}
+                  </option>
+                </select>
+              </td>
               <td>{{ point.depth }}</td>
               <td>{{ point.absMark }}</td>
               <td>{{ point.startDate }}</td>

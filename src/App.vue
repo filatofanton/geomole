@@ -1,6 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/main/Header.vue'
+import Header2 from './components/main/Header2.vue'
 import HeaderAuth from './components/main/HeaderAuth.vue'
 import Footer from './components/main/Footer.vue'
 import ApplicationDescription from './components/main/ApplicationDescription.vue'
@@ -9,7 +10,8 @@ export default {
   components: {Header,HeaderAuth,Footer,ApplicationDescription},
   data() {
     return {
-      showHeader: false,
+      // showHeader: false,
+      showHeader: true,
       token: '',
       currentProject: null,
     }
